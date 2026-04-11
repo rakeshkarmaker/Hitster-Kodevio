@@ -22,7 +22,7 @@ export function AddSongDialogContent() {
     });
 
     return (
-        <DialogContent>
+        <DialogContent className="dashboard-dialog">
             <DialogHeader>
                 <DialogTitle>Add New Song</DialogTitle>
                 <DialogDescription>Fill in the details for the new song.</DialogDescription>

@@ -5,16 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { songsData } from "@/lib/data/admin/dashboard/songs-data";
+import { songsData } from "@/lib/data/songs-data";
 import { ChevronDown, Plus, Search } from "lucide-react";
 
 export default function SongsPage() {
     return (
         <Dialog>
             <section className="w-full space-y-6">
-                <div className="space-y-2">
-                    <h1 className="text-2xl leading-none font-semibold text-foreground">Songs</h1>
-                    <p className="leading-none text-muted-foreground">Manage your game contents and system configuration.</p>
+                <div className="dashboard-page-header">
+                    <h1 className="dashboard-page-title">Songs</h1>
+                    <p className="dashboard-page-subtitle">Manage your game contents and system configuration.</p>
                 </div>
 
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -25,9 +25,9 @@ export default function SongsPage() {
 
                     <DialogTrigger
                         render={
-                            <Button>
-                                <Plus />
-                                Add Songs
+                            <Button className="h-11.5 rounded-[5px] bg-black px-3 text-[16px] font-medium text-white hover:bg-black/95">
+                                <Plus className="size-6" />
+                                Add New Song
                             </Button>
                         }
                     />
@@ -64,19 +64,19 @@ export default function SongsPage() {
                         <table className="w-full table-fixed border-collapse">
                             <thead>
                                 <tr className="h-11.5 bg-primary">
-                                    <th className="w-24 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
+                                    <th className="w-30 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
                                         Song Name
                                     </th>
-                                    <th className="w-64 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
+                                    <th className="w-30 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
                                         Artist Name
                                     </th>
-                                    <th className="w-80 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
+                                    <th className="w-15 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
                                         Release Year
                                     </th>
-                                    <th className="w-80 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
+                                    <th className="w-30 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
                                         Spotify ID
                                     </th>
-                                    <th className="w-40 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
+                                    <th className="w-10 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
                                         Action
                                     </th>
                                 </tr>
@@ -139,9 +139,9 @@ export default function SongsPage() {
                         </button>
                     </div>
                 </div>
-            </section>
 
-            <AddSongDialogContent />
+                <AddSongDialogContent />
+            </section>
         </Dialog>
     );
 }

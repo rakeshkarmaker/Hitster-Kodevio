@@ -18,8 +18,8 @@ const settingsNav = [
 
 function SettingsNav({ activeTab, onSelect }: { activeTab: SettingsTab; onSelect: (tab: SettingsTab) => void }) {
     return (
-        <aside className="w-full rounded-lg bg-background p-4 shadow-lg sm:p-6 lg:sticky lg:top-24">
-            <nav className="grid gap-2">
+        <aside className="w-full rounded-[10px] border border-(--dashboard-border) bg-(--dashboard-surface) p-4 shadow-(--dashboard-card-shadow) lg:sticky lg:top-24">
+            <nav className="mx-auto flex w-full max-w-56.25 flex-col gap-2.5">
                 {settingsNav.map((item) => {
                     const isActive = activeTab === item.key;
                     const Icon = item.icon;
@@ -29,7 +29,7 @@ function SettingsNav({ activeTab, onSelect }: { activeTab: SettingsTab; onSelect
                             key={item.key}
                             size="sm"
                             variant={isActive ? "default" : "ghost"}
-                            className="justify-start"
+                            className="h-12 w-full justify-start rounded-[20px] px-4 text-[16px] font-medium"
                             onClick={() => onSelect(item.key)}
                         >
                             <Icon />
@@ -48,7 +48,7 @@ function ProfilePanel() {
     });
 
     return (
-        <section className="w-full rounded-2xl bg-background shadow-2xl">
+        <section className="dashboard-card min-w-0 overflow-hidden">
             <div className="border-b border-border px-6 py-4">
                 <h2 className="text-xl font-semibold">Profile Setting</h2>
             </div>
@@ -67,18 +67,26 @@ function ProfilePanel() {
                 </div>
 
                 <form
-                    className="grid gap-6 lg:grid-cols-2"
+                    className="grid gap-6"
                     onSubmit={(e) => {
                         e.preventDefault();
                         form.handleSubmit();
                     }}
                 >
-                    <form.AppField name="name">
-                        {(field) => <field.FormInput type="text" label="Name" placeholder="Enter your name" />}
-                    </form.AppField>
-                    <form.AppField name="email">
-                        {(field) => <field.FormInput type="email" label="Email" placeholder="Enter your email" />}
-                    </form.AppField>
+                    <div className="grid gap-6 lg:grid-cols-2">
+                        <form.AppField name="name">
+                            {(field) => <field.FormInput type="text" label="Name" placeholder="Enter your name" />}
+                        </form.AppField>
+                        <form.AppField name="email">
+                            {(field) => <field.FormInput type="email" label="Email" placeholder="Enter your email" />}
+                        </form.AppField>
+                    </div>
+
+                    <form.AppForm>
+                        <div className="flex justify-end pt-2">
+                            <form.FormSubmit label="Save Changes" className="h-12 w-88.5 rounded-[5px]" />
+                        </div>
+                    </form.AppForm>
                 </form>
             </div>
         </section>
@@ -91,7 +99,7 @@ function SecurityPanel() {
     });
 
     return (
-        <section className="w-full rounded-2xl bg-background shadow-2xl">
+        <section className="dashboard-card min-w-0 overflow-hidden">
             <div className="border-b border-border px-6 py-4">
                 <h2 className="text-xl font-semibold">Security</h2>
             </div>
@@ -113,7 +121,9 @@ function SecurityPanel() {
                     {(field) => <field.FormInput type="password" label="Confirm New Password" placeholder="Confirm new password" />}
                 </form.AppField>
                 <form.AppForm>
-                    <form.FormSubmit label="Save Changes" />
+                    <div className="flex justify-end pt-2">
+                        <form.FormSubmit label="Save Changes" className="h-12 w-88.5 rounded-[5px]" />
+                    </div>
                 </form.AppForm>
             </form>
         </section>
@@ -142,7 +152,7 @@ function NotificationPanel() {
     const [autoSaveProjects, setAutoSaveProjects] = useState(true);
 
     return (
-        <section className="w-full rounded-2xl bg-background shadow-2xl">
+        <section className="dashboard-card min-w-0 overflow-hidden">
             <div className="border-b border-border px-6 py-4">
                 <h2 className="text-xl font-semibold">Notification</h2>
             </div>
@@ -187,12 +197,12 @@ export default function SettingsPage() {
 
     return (
         <section className="w-full space-y-6">
-            <div className="space-y-2">
-                <h1 className="text-2xl leading-none font-semibold text-foreground">Settings</h1>
-                <p className="leading-none text-muted-foreground">Customize your experience and account details.</p>
+            <div className="dashboard-page-header">
+                <h1 className="dashboard-page-title">Settings</h1>
+                <p className="dashboard-page-subtitle">Customize your experience and account details.</p>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-[320px_minmax(0,1fr)] xl:items-start">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[260px_minmax(0,1fr)] xl:items-start">
                 <SettingsNav activeTab={activeTab} onSelect={setActiveTab} />
                 {panel}
             </div>

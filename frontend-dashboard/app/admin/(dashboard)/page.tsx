@@ -62,7 +62,7 @@ function SongRow({ title, artist, year }: SongRowData) {
 
 export default function Dashboard() {
     return (
-        <section className="mx-auto w-full max-w-281.75 pb-10">
+        <section className="mx-auto w-full pb-10">
             <div className="grid grid-cols-1 gap-4.25 md:grid-cols-2 xl:grid-cols-4">
                 {statCards.map((card) => (
                     <StatCard key={card.title} {...card} />

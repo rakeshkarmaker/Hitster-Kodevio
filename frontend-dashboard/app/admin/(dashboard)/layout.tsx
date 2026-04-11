@@ -14,7 +14,7 @@ function SidebarNav() { // This component is used in both the mobile sheet and t
 
     const navItems = [
         { label: "Dashboard", href: "/admin", icon: LayoutGrid },
-        { label: "Songs Database", href: "/admin/songs", icon: Music2 },
+        { label: "Songs", href: "/admin/songs", icon: Music2 },
         { label: "QR Mapping", href: "/admin/qr-mapping", icon: QrCode },
         { label: "Settings", href: "/admin/settings", icon: Settings },
     ];
@@ -32,8 +32,7 @@ function SidebarNav() { // This component is used in both the mobile sheet and t
                         className={cn(
                             "flex h-14 w-full max-w-56.25 items-center gap-2 rounded-[20px] px-4 text-[20px] font-medium leading-7 transition-colors",
                             isActive ? "bg-[#333333] text-white" : "text-[#333333] hover:bg-[#f5f5f5]"
-                        )}
-                    >
+                        )}>
                         <Icon className="size-6" />
                         {item.label}
                     </Link>
