@@ -1,10 +1,9 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Image as QrCode, LayoutDashboard, Menu, Settings, Music } from "lucide-react";
+import { LayoutGrid, Menu, QrCode, Settings, Music2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,14 +13,14 @@ function SidebarNav() { // This component is used in both the mobile sheet and t
     const pathname = usePathname();
 
     const navItems = [
-        { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-        { label: "Songs Database", href: "/admin/songs", icon: Music },
-        { label: "QR Mapping Page", href: "/admin/qr-mapping", icon: QrCode },
+        { label: "Dashboard", href: "/admin", icon: LayoutGrid },
+        { label: "Songs Database", href: "/admin/songs", icon: Music2 },
+        { label: "QR Mapping", href: "/admin/qr-mapping", icon: QrCode },
         { label: "Settings", href: "/admin/settings", icon: Settings },
     ];
 
     return (
-        <nav className="flex flex-col p-4 space-y-1">
+        <nav className="flex flex-col items-center gap-2 px-3 py-6">
             {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 const Icon = item.icon;
@@ -30,9 +29,12 @@ function SidebarNav() { // This component is used in both the mobile sheet and t
                     <Link
                         key={item.href}
                         href={item.href}
-                        className={cn(buttonVariants({ variant: isActive ? "default" : "ghost" }), "justify-start")}
+                        className={cn(
+                            "flex h-14 w-full max-w-56.25 items-center gap-2 rounded-[20px] px-4 text-[20px] font-medium leading-7 transition-colors",
+                            isActive ? "bg-[#333333] text-white" : "text-[#333333] hover:bg-[#f5f5f5]"
+                        )}
                     >
-                        <Icon className="mr-2" />
+                        <Icon className="size-6" />
                         {item.label}
                     </Link>
                 );
@@ -45,12 +47,13 @@ function SidebarNav() { // This component is used in both the mobile sheet and t
 
 // Admin Dashboard Layout
 export default function DashboardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    const avatarImage = "https://www.figma.com/api/mcp/asset/077dc4a9-5676-4035-a442-b46177daae72";
+    const avatarImage = "/user_avater.png";
+    const logoImage = "/logo_hitster.png";
 
     return (
         <div className="min-h-screen bg-background">
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 h-20 bg-background border-b z-50 flex items-center">
+            <header className="fixed top-0 left-0 right-0 z-50 flex h-20 items-center border-b border-border bg-background shadow-[0px_0px_4px_0px_rgba(0,0,0,0.25)]">
                 <div className="flex items-center justify-between w-full px-6">
                     <div className="flex items-center gap-3">
                         {/* Mobile menu button */}
@@ -68,22 +71,22 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
                                 ></SheetTrigger>
                                 <SheetContent side="left" className="w-[calc(100vw-1rem)] max-w-72 p-0">
                                     <div className="border-b px-4 py-5">
-                                        <Image src="/logo-3.png" alt="Logo" width={160} height={28} />
+                                        <Image src={logoImage} alt="Logo" width={52} height={52} unoptimized />
                                     </div>
                                     <SidebarNav />
                                 </SheetContent>
                             </Sheet>
                         </div>
 
-                        <Image src="/logo-3.png" alt="Logo" width={202} height={32} />
+                        <Image src={logoImage} alt="Logo" width={52} height={52} unoptimized />
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Avatar>
+                        <Avatar className="size-12">
                             <AvatarImage src={avatarImage} alt="Rumi Aktar" />
                             <AvatarFallback>RA</AvatarFallback>
                         </Avatar>
-                        <span className="text-lg font-semibold">Rumi Aktar</span>
+                        <span className="text-[20px] font-semibold leading-normal text-[#333333]">Rumi Aktar</span>
                     </div>
                 </div>
             </header>
@@ -91,12 +94,12 @@ export default function DashboardLayout({ children }: Readonly<{ children: React
             {/* Body */}
             <div className="flex pt-20">
                 {/* Desktop Sidebar */}
-                <aside className="hidden md:block fixed top-20 left-0 h-[calc(100vh-80px)] w-64 bg-background border-r">
+                <aside className="fixed left-0 top-20 hidden h-[calc(100vh-80px)] w-63.25 border-r border-border bg-background md:block">
                     <SidebarNav />
                 </aside>
 
                 {/* Main Content */}
-                <main className="flex-1 p-6 md:ml-64">{children}</main>
+                <main className="flex-1 p-6 md:ml-63.25 md:px-7.5 md:pt-10">{children}</main>
             </div>
         </div>
     );

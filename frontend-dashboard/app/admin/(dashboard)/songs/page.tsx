@@ -1,24 +1,20 @@
 "use client";
 
-import { useAppForm } from "@/components/form/form-context";
+import { AddSongDialogContent } from "@/components/dashboard/add-song-dialog-content";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { usersData } from "@/lib/data/admin/dashboard/users-data";
+import { songsData } from "@/lib/data/admin/dashboard/songs-data";
 import { ChevronDown, Plus, Search } from "lucide-react";
 
 export default function SongsPage() {
-    const form = useAppForm({
-        defaultValues: { name: "", email: "" },
-    });
-
     return (
         <Dialog>
             <section className="w-full space-y-6">
                 <div className="space-y-2">
-                    <h1 className="text-2xl leading-none font-semibold text-foreground">Users</h1>
-                    <p className="leading-none text-muted-foreground">Manage your users and their permissions.</p>
+                    <h1 className="text-2xl leading-none font-semibold text-foreground">Songs</h1>
+                    <p className="leading-none text-muted-foreground">Manage your game contents and system configuration.</p>
                 </div>
 
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -31,19 +27,19 @@ export default function SongsPage() {
                         render={
                             <Button>
                                 <Plus />
-                                Add Users
+                                Add Songs
                             </Button>
                         }
                     />
                 </div>
 
                 <div className="space-y-3 md:hidden">
-                    {usersData.map((user) => (
-                        <article key={`mobile-${user.id}`} className="rounded-lg border border-border bg-card p-4 shadow-sm">
+                    {songsData.map((song) => (
+                        <article key={`mobile-${song.spotifyId}`} className="rounded-lg border border-border bg-card p-4 shadow-sm">
                             <div className="space-y-1">
-                                <p className="text-xs font-medium text-muted-foreground">User #{user.id}</p>
-                                <h3 className="text-base font-semibold text-foreground">{user.name}</h3>
-                                <p className="break-all text-sm text-muted-foreground">{user.email}</p>
+                                <p className="text-xs font-medium text-muted-foreground">Song #{song.spotifyId}</p>
+                                <h3 className="text-base font-semibold text-foreground">{song.songName}</h3>
+                                <p className="break-all text-sm text-muted-foreground">{song.ArtistName}</p>
                             </div>
                             <div className="mt-3">
                                 <DropdownMenu>
@@ -69,13 +65,16 @@ export default function SongsPage() {
                             <thead>
                                 <tr className="h-11.5 bg-primary">
                                     <th className="w-24 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
-                                        No
+                                        Song Name
                                     </th>
                                     <th className="w-64 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
-                                        Name
+                                        Artist Name
                                     </th>
                                     <th className="w-80 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
-                                        Email
+                                        Release Year
+                                    </th>
+                                    <th className="w-80 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
+                                        Spotify ID
                                     </th>
                                     <th className="w-40 border border-border px-2 text-left text-base leading-normal font-medium text-primary-foreground lg:text-[20px]">
                                         Action
@@ -84,16 +83,19 @@ export default function SongsPage() {
                             </thead>
 
                             <tbody>
-                                {usersData.map((user) => (
-                                    <tr key={user.id} className="h-13">
+                                {songsData.map((song) => (
+                                    <tr key={song.spotifyId} className="h-13">
+                                        <td className="border border-border px-2 text-sm leading-6 font-normal text-muted-foreground lg:text-[16px]">
+                                            {song.songName}
+                                        </td>
+                                        <td className="border border-border px-2 text-sm leading-6 font-normal text-muted-foreground lg:text-[16px]">
+                                            {song.ArtistName}
+                                        </td>
                                         <td className="border border-border px-2 text-sm leading-[1.2] font-normal text-muted-foreground lg:text-[16px]">
-                                            {user.id}
+                                            {song.releaseYear}
                                         </td>
                                         <td className="border border-border px-2 text-sm leading-6 font-normal text-muted-foreground lg:text-[16px]">
-                                            {user.name}
-                                        </td>
-                                        <td className="border border-border px-2 text-sm leading-6 font-normal text-muted-foreground lg:text-[16px]">
-                                            {user.email}
+                                            {song.spotifyId}
                                         </td>
                                         <td className="border border-border px-2">
                                             <DropdownMenu>
@@ -103,7 +105,7 @@ export default function SongsPage() {
                                                 </DropdownMenuTrigger>
 
                                                 <DropdownMenuContent align="start" className="w-40">
-                                                    <DropdownMenuItem>Edit user</DropdownMenuItem>
+                                                    <DropdownMenuItem>Edit</DropdownMenuItem>
                                                     <DropdownMenuItem>Disable</DropdownMenuItem>
                                                     <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
                                                 </DropdownMenuContent>
@@ -139,36 +141,7 @@ export default function SongsPage() {
                 </div>
             </section>
 
-            <DialogContent>
-                <DialogHeader>
-                    <DialogTitle>Add New User</DialogTitle>
-                    <DialogDescription>Drag and drop your files here</DialogDescription>
-                </DialogHeader>
-                <form
-                    className="grid gap-6"
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        form.handleSubmit();
-                    }}
-                >
-                    <form.AppField name="name">{(field) => <field.FormInput label="Name" placeholder="Enter user name" />}</form.AppField>
-                    <form.AppField name="email">
-                        {(field) => <field.FormInput label="Email" placeholder="Enter user email" />}
-                    </form.AppField>
-                    <div className="grid grid-cols-2 gap-4">
-                        <DialogClose
-                            render={
-                                <Button variant="secondary" type="button" className="rounded-md">
-                                    Cancel
-                                </Button>
-                            }
-                        />
-                        <form.AppForm>
-                            <form.FormSubmit label="Submit" />
-                        </form.AppForm>
-                    </div>
-                </form>
-            </DialogContent>
+            <AddSongDialogContent />
         </Dialog>
     );
 }
