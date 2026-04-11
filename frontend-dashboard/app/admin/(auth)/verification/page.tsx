@@ -49,11 +49,15 @@ export default function Verify() {
                                 <FieldLabel htmlFor={field.name}>Enter your OTP</FieldLabel>
                                 <InputOTP
                                     id={field.name}
-                                    name={field.name}
+                                    // name={field.name}
                                     maxLength={6}
                                     value={field.state.value}
                                     onBlur={field.handleBlur}
-                                    onChange={(val) => field.handleChange(val)}
+                                    onChange={(val) => {
+                                        if(typeof val === "string") {
+                                            field.handleChange(val);
+                                        }
+                                    }}
                                     aria-invalid={isInvalid}
                                 >
                                     <InputOTPGroup className="mx-auto">

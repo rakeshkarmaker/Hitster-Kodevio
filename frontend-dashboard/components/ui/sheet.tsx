@@ -26,11 +26,11 @@ function Sheet({ children }: { children: React.ReactNode }) {
     return <SheetContext.Provider value={{ open, setOpen }}>{children}</SheetContext.Provider>;
 }
 
-function SheetTrigger({ render }: { render: React.ReactElement }) {
+function SheetTrigger({ render }: { render: React.ReactElement<{ onClick?: React.MouseEventHandler<HTMLElement> }> }) {
     const { setOpen } = useSheetContext();
 
     return React.cloneElement(render, {
-        onClick: (event: React.MouseEvent) => {
+        onClick: (event: React.MouseEvent<HTMLElement>) => {
             render.props.onClick?.(event);
             setOpen(true);
         },

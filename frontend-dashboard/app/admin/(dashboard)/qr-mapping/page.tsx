@@ -19,14 +19,12 @@ export default function QrMappingPage() {
                 <div className="mt-4 flex items-center justify-between gap-4">
                     <p className="dashboard-section-title">QR Code to Song Mappings</p>
 
-                    <DialogTrigger
-                        render={
-                            <Button className="h-11.5 rounded-[5px] bg-black px-3 text-[16px] leading-normal font-medium text-white hover:bg-black/95">
-                                <Plus className="size-6" />
-                                Map New Card
-                            </Button>
-                        }
-                    />
+                    <DialogTrigger asChild>
+                        <Button className="h-11.5 rounded-[5px] bg-black px-3 text-[16px] leading-normal font-medium text-white hover:bg-black/95">
+                            <Plus className="size-6" />
+                            Map New Card
+                        </Button>
+                    </DialogTrigger>
                 </div>
 
                 <div className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">

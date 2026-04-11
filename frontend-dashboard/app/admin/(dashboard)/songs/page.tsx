@@ -23,14 +23,12 @@ export default function SongsPage() {
                         <Search className="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
                     </div>
 
-                    <DialogTrigger
-                        render={
-                            <Button className="h-11.5 rounded-[5px] bg-black px-3 text-[16px] font-medium text-white hover:bg-black/95">
-                                <Plus className="size-6" />
-                                Add New Song
-                            </Button>
-                        }
-                    />
+                    <DialogTrigger asChild>
+                        <Button className="h-11.5 rounded-[5px] bg-black px-3 text-[16px] font-medium text-white hover:bg-black/95">
+                            <Plus className="size-6" />
+                            Add New Song
+                        </Button>
+                    </DialogTrigger>
                 </div>
 
                 <div className="space-y-3 md:hidden">

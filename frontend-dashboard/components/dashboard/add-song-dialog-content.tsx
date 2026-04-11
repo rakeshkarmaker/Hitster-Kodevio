@@ -49,16 +49,14 @@ export function AddSongDialogContent() {
                 </form.AppField>
 
                 <div className="grid grid-cols-2 gap-4">
-                    <DialogClose
-                        render={
-                            <Button variant="outline" type="button" className="rounded-md">
-                                Cancel
-                            </Button>
-                        }
-                    />
+                    <DialogClose asChild>
+                        <Button variant="outline" type="button" className="w-full rounded-md">
+                            Cancel
+                        </Button>
+                    </DialogClose>
 
                     <form.AppForm>
-                        <form.FormSubmit label="Add Song" className="rounded-md" />
+                        <form.FormSubmit label="Add Song" className="w-full rounded-md" />
                     </form.AppForm>
                 </div>
             </form>

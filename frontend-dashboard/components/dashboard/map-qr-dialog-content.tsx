@@ -25,13 +25,11 @@ export function MapQrDialogContent() {
             <DialogHeader>
                 <div className="flex items-center justify-between px-3 py-2">
                     <DialogTitle className="text-[24px] leading-normal font-semibold text-black">Map QR Code</DialogTitle>
-                    <DialogClose
-                        render={
-                            <button type="button" className="text-black" aria-label="Close modal">
-                                <X className="size-7" />
-                            </button>
-                        }
-                    />
+                    <DialogClose asChild>
+                        <button type="button" className="text-black" aria-label="Close modal">
+                            <X className="size-7" />
+                        </button>
+                    </DialogClose>
                 </div>
                 <DialogDescription className="sr-only">Create a QR code to song mapping.</DialogDescription>
             </DialogHeader>
@@ -68,16 +66,14 @@ export function MapQrDialogContent() {
                 </form.AppField>
 
                 <div className="grid grid-cols-2 gap-4">
-                    <DialogClose
-                        render={
-                            <Button type="button" variant="outline" className="rounded-md">
-                                Cancel
-                            </Button>
-                        }
-                    />
+                    <DialogClose asChild>
+                        <Button type="button" variant="outline" className="w-full rounded-md">
+                            Cancel
+                        </Button>
+                    </DialogClose>
 
                     <form.AppForm>
-                        <form.FormSubmit label="Create Mapping" className="rounded-md" />
+                        <form.FormSubmit label="Create Mapping" className="w-full rounded-md" />
                     </form.AppForm>
                 </div>
             </form>
